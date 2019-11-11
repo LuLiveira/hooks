@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function App() {
+  const [techs, setTech] = useState([
+    'ReactJS',
+    'React Native'
+  ]);
+
   return (
-    <h1>Hooks</h1>
+    <>
+      <ul>
+        {techs.map(tech => <li key={tech}>{tech}</li> )}
+      </ul>
+    </>
   );
 }
 
