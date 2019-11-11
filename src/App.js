@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
   const [techs, setTech] = useState([
@@ -8,9 +8,10 @@ function App() {
 
   const [newTech, setNewTech] = useState('');
 
-  function handleAdd() {
+  const handleAdd = useCallback(() => {
     setTech(...techs, newTech);
-  }
+    setNewTech('');
+  }, [newTech, techs]);
 
   //Executa apenas 1 vez (ComponentDidMount)
   useEffect(() => {
@@ -32,7 +33,10 @@ function App() {
     return () => {};
   }, [])
 
+  //Útil para realizar calculos baseado em informações do useState (Evita que o calculo seja feito no return do JSX e faz com que o calculo seja feito apenas se houver alteração nas informações usadas no calculo)
   const techSize = useMemo(() => tech.length, [tech]);
+
+  
 
   return (
     <>
