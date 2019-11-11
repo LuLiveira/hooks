@@ -12,6 +12,26 @@ function App() {
     setTech(...techs, newTech);
   }
 
+  //Executa apenas 1 vez (ComponentDidMount)
+  useEffect(() => {
+    const techs = localStorage.getItem('techs');
+
+    if(techs){
+      setTech(JSON.parse(techs));
+    }
+  }, [])
+
+  //Executa sempre que tech sofre alteração (ComponentDidUpdate)
+  useEffect(() => {
+    localStorage.setItem('techs', JSON.stringify(tech));
+  }, [tech]);
+
+  //Executa quando o componente deixa de ser montado (ComponentWillUnmount)
+  useEffect(() => {
+    //Quando retorna uma função no useEffect essa função sera executada no ComponentWillUnmount
+    return () => {};
+  }, [])
+
   return (
     <>
       <ul>
