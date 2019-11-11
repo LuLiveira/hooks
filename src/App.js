@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function App() {
   const [techs, setTech] = useState([
@@ -32,11 +32,16 @@ function App() {
     return () => {};
   }, [])
 
+  const techSize = useMemo(() => tech.length, [tech]);
+
   return (
     <>
       <ul>
         {techs.map(tech => <li key={tech}>{tech}</li> )}
       </ul>
+
+      <strong>Você tem {techSize} tecnologias</strong>
+      <br />
 
       <input value={newTech} onChange={e => setNewTech(e.target.value)} />
 
